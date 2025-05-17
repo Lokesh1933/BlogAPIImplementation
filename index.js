@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { all } from "axios";
 
 const app = express();
 const port = 4000;
@@ -41,8 +42,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Write your code here//
 
 //CHALLENGE 1: GET All posts
+app.get("/posts",(req,res) => {
+  res.json(posts)
+})
 
 //CHALLENGE 2: GET a specific post by id
+app.get("posts/:id",(req,res)=>{
+  const id = parseInt(req.params.id)
+  const postindex = posts.find((post) => post.id === id)
+  if(!postindex){
+    return res.status(401).json({error : `Post with ${id} not found`})
+  }
+  res.json(postindex)
+})
 
 //CHALLENGE 3: POST a new post
 
