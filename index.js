@@ -47,7 +47,7 @@ app.get("/posts",(req,res) => {
 })
 
 //CHALLENGE 2: GET a specific post by id
-app.get("posts/:id",(req,res)=>{
+app.get("/posts/:id",(req,res)=>{
   const id = parseInt(req.params.id)
   const postindex = posts.find((post) => post.id === id)
   if(!postindex){
@@ -78,14 +78,20 @@ app.post("/posts",(req,res) => {
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
 app.patch("/posts/:id",(req,res) => {
   const id = parseInt(req.params.id)
+  const useexistingpost = posts.find(post => post.id === id)
+  if (!useexistingpost) {
+    return res.status(404).json({ message: "Post not found" })
+  };
   const findPosttoedit = posts.findIndex((post) => post.id === id)
   const updatedpost = {
     id:id,
-    title: req.body.title || ,
-    content: req.body.content || ,
-    author: req.body.author || ,
+    title: req.body.title || useexistingpost.title,
+    content: req.body.content || useexistingpost.content,
+    author: req.body.author || useexistingpost.author,
 
   }
+  posts[findPosttoedit] = updatedpost
+  res.json(updatedpost)
 })
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
