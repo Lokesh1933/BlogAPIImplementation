@@ -76,7 +76,9 @@ app.post("/posts",(req,res) => {
 })
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
-app.patch()
+app.patch("",(req,res) => {
+  
+})
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
 
