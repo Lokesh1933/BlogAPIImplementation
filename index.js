@@ -57,6 +57,23 @@ app.get("posts/:id",(req,res)=>{
 })
 
 //CHALLENGE 3: POST a new post
+app.post("/posts",(req,res) => {
+  const id = lastId + 1
+  const title = req.body.title
+  const content = req.body.content
+  const author = req.body.author
+  console.log(req.body)
+  const newPost = {
+    id: id,
+    title: title,
+    content: content,
+    author: author,
+    date: new Date(),
+  }
+  lastId = id
+  posts.push(newPost)
+  res.status(200).json(newPost)
+})
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
 
